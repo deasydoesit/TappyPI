@@ -47,8 +47,7 @@ bleno.on('advertisingStart', function(error) {
                         
                         // Accept a new value for the characterstic's value
                         onWriteRequest : function(data, offset, withoutResponse, callback) {
-                            this.value = data;
-                            console.log('Write request: value = ' + this.value.toString("utf-8"));
+                            console.log('Write request: value = ' + Buffer.from(data, 'base64').toString());
                             callback(this.RESULT_SUCCESS);
                         }
  
