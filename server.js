@@ -52,7 +52,7 @@ bleno.on('advertisingStart', function(error) {
                             console.log(data);
                             console.log(data.toString('utf8'));
                             console.log('Write request: value = ' + data.toString("utf-8"));
-                            console.log('Write request: value = ' + this.value.toString("utf-8"));
+                            console.log('Write request: value = ' + this.value.toString("hex"));
                             callback(this.RESULT_SUCCESS);
                         }
  
