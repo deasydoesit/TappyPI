@@ -1,4 +1,5 @@
 var bleno = require('bleno');
+var Buffer = require('buffer').Buffer;
  
 // Advertise BLE address after powering up BLE module
 bleno.on('stateChange', function(state) {
@@ -42,13 +43,13 @@ bleno.on('advertisingStart', function(error) {
                         // Send a message back to the client with the characteristic's value
                         onReadRequest : function(offset, callback) {
                             console.log("Read request received");
-                            callback(this.RESULT_SUCCESS, new Buffer("Echo: " + (this.value ? this.value.toString("utf-8") : "")));
+                            callback(this.RESULT_SUCCESS, Buffer("Echo: " + (this.value ? this.value.toString("utf-8") : "")));
                         },
                         
                         // Accept a new value for the characterstic's value
                         onWriteRequest : function(data, offset, withoutResponse, callback) {
                             console.log(data);
-                            console.log('Write request: value = ' + Buffer.from(data, 'base64').toString());
+                            console.log('Write request: value = ' + data.toString('utf8'));
                             callback(this.RESULT_SUCCESS);
                         }
  
