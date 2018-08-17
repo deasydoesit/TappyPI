@@ -56,7 +56,7 @@ bleno.on('advertisingStart', function(error) {
                             console.log('Write request: value = ' + this.value);
                             callback(this.RESULT_SUCCESS);
 
-                            web3.eth.sendSignedTransaction('0x' + serializedTx, function(err, result) {
+                            web3.eth.sendSignedTransaction('0x' + this.value, function(err, result) {
                                 if (err) {
                                     console.log('error', err);
                                 }
