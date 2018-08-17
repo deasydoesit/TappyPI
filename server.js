@@ -51,8 +51,9 @@ bleno.on('advertisingStart', function(error) {
                         // Create write functionality e.g., where endpoints can send data to Pi
                         onWriteRequest : function(data, offset, withoutResponse, callback) {
                             this.value = data;
+                            console.log(this.value.toString("utf-8"));
                             var serializedTx = '0x' + this.value.toString('hex');
-                            console.log(typeof serializedTx);
+                            console.log(serializedTx);
                             // console.log(data);
                             // console.log('Write request: value = ' + this.value.toString(16));
                             // callback(this.RESULT_SUCCESS);
