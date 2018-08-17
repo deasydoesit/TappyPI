@@ -1,7 +1,7 @@
 var bleno = require('bleno');
 var Web3 = require('web3');
 
-const web3 = new Web3(new Web3.providers.HttpProvider("https://https://ropsten.infura.io/v3/d389caf107ea4b5ea660d1f636ebb772"));
+const web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d389caf107ea4b5ea660d1f636ebb772"));
  
 // Advertise BLE address after powering up BLE module
 bleno.on('stateChange', function(state) {
@@ -53,14 +53,14 @@ bleno.on('advertisingStart', function(error) {
                             this.value = data;
                             var serializedTx = this.value.toString("hex");
                             console.log(data);
-                            console.log('Write request: value = ' + this.value.toString("hex"));
+                            console.log('Write request: value = ' + this.value.toString(16));
+                            callback(this.RESULT_SUCCESS);
 
                             web3.eth.sendSignedTransaction('0x' + serializedTx, function(err, result) {
                                 if (err) {
                                     console.log('error', err);
                                 }
                                 console.log('sent', result);
-                                callback(this.RESULT_SUCCESS);
                             });
                         }
                     })
