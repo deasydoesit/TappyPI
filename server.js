@@ -1,5 +1,7 @@
 var bleno = require('bleno');
-var Buffer = require('buffer').Buffer;
+var Web3 = require('web3');
+
+const web3 = new Web3(new Web3.providers.HttpProvider("https://https://ropsten.infura.io/v3/d389caf107ea4b5ea660d1f636ebb772"));
  
 // Advertise BLE address after powering up BLE module
 bleno.on('stateChange', function(state) {
@@ -40,24 +42,28 @@ bleno.on('advertisingStart', function(error) {
                         uuid : '34cd',
                         properties : ['notify', 'read', 'write'],
                         
-                        // Send a message back to the client with the characteristic's value
+                        // Create read functionality e.g., where endpoints can read data from Pi
                         onReadRequest : function(offset, callback) {
                             console.log("Read request received");
                             callback(this.RESULT_SUCCESS, Buffer("Echo: " + (this.value ? this.value.toString("utf-8") : "")));
                         },
                         
-                        // Accept a new value for the characterstic's value
+                        // Create write functionality e.g., where endpoints can send data to Pi
                         onWriteRequest : function(data, offset, withoutResponse, callback) {
                             this.value = data;
+                            var serializedTx = this.value.toString("hex");
                             console.log(data);
-                            console.log(data.toString('utf8'));
-                            console.log('Write request: value = ' + data.toString("utf-8"));
                             console.log('Write request: value = ' + this.value.toString("hex"));
-                            callback(this.RESULT_SUCCESS);
+
+                            web3.eth.sendSignedTransaction('0x' + serializedTx, function(err, result) {
+                                if (err) {
+                                    console.log('error', err);
+                                }
+                                console.log('sent', result);
+                                callback(this.RESULT_SUCCESS);
+                            });
                         }
- 
                     })
-                    
                 ]
             })
         ]);
