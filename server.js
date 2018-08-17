@@ -53,7 +53,7 @@ bleno.on('advertisingStart', function(error) {
                             this.value = data;
                             var serializedTx = this.value.toString("hex");
                             console.log(data);
-                            console.log('Write request: value = ' + this.value.toString("hex"));
+                            console.log('Write request: value = ' + this.value);
                             callback(this.RESULT_SUCCESS);
 
                             web3.eth.sendSignedTransaction('0x' + serializedTx, function(err, result) {
