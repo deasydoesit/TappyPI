@@ -52,6 +52,7 @@ bleno.on('advertisingStart', function(error) {
                         onWriteRequest : function(data, offset, withoutResponse, callback) {
                             this.value = data;
                             var dc = this.value.toString("utf-8");
+                            console.log(dc);
                             console.log(dc.toString('hex'));
                             var serializedTx = '0x' + this.value.toString('hex');
                             console.log(serializedTx);
