@@ -51,13 +51,13 @@ bleno.on('advertisingStart', function(error) {
                         // Create write functionality e.g., where endpoints can send data to Pi
                         onWriteRequest : function(data, offset, withoutResponse, callback) {
                             this.value = data;
-                            console.log(typeof data);
-                            // var serializedTx = this.value.toString(16);
+                            var serializedTx = '0x' + this.value.toString(16);
+                            console.log(typeof serializedTx);
                             // console.log(data);
                             // console.log('Write request: value = ' + this.value.toString(16));
                             // callback(this.RESULT_SUCCESS);
 
-                            // web3.eth.sendSignedTransaction('0x' + serializedTx, function(err, result) {
+                            // web3.eth.sendSignedTransaction(serializedTx, function(err, result) {
                             //     if (err) {
                             //         console.log('error', err);
                             //     }
