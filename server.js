@@ -1,71 +1,21 @@
-var bleno = require('bleno');
-var Web3 = require('web3');
+const express = require('express');
+const app = express();
+const mongoose = require('mongoose');
 
-const web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d389caf107ea4b5ea660d1f636ebb772"));
- 
-// Advertise BLE address after powering up BLE module
-bleno.on('stateChange', function(state) {
-    console.log('State change: ' + state);
-    if (state === 'poweredOn') {
-        bleno.startAdvertising('MyDevice',['12ab']);
-    } else {
-        bleno.stopAdvertising();
-    }
-});
- 
-// Listen for accepted connection and alert 
-bleno.on('accept', function(clientAddress) {
-    console.log("Accepted connection from address: " + clientAddress);
-});
- 
-// Listen for disconnect and alert
-bleno.on('disconnect', function(clientAddress) {
-    console.log("Disconnected from address: " + clientAddress);
-});
- 
-// Listen for advertisingStart, then create a new service and characteristics
-bleno.on('advertisingStart', function(error) {
-    if (error) {
-        console.log("Advertising start error:" + error);
-    } else {
-        console.log("Advertising start success");
-        bleno.setServices([
-            
-            // Create new service
-            new bleno.PrimaryService({
-                uuid : '12ab',
-                characteristics : [
-                    
-                    // Create new characteristic within that service
-                    new bleno.Characteristic({
-                        value : null,
-                        uuid : '34cd',
-                        properties : ['notify', 'read', 'write'],
-                        
-                        // Create read functionality e.g., where endpoints can read data from Pi
-                        onReadRequest : function(offset, callback) {
-                            console.log("Read request received");
-                            callback(this.RESULT_SUCCESS, Buffer("Echo: " + (this.value ? this.value.toString("utf-8") : "")));
-                        },
-                        
-                        // Create write functionality e.g., where endpoints can send data to Pi
-                        onWriteRequest : function(data, offset, withoutResponse, callback) {
-                            this.value = data;
-                            var serializedTx = this.value.toString("hex");
-                            console.log(data);
-                            console.log('Write request: value = ' + this.value);
-                            callback(this.RESULT_SUCCESS);
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static("client/build"));
+    const path = require('path');
+    app.get('*', (req, res) => {
+      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+  }
 
-                            web3.eth.sendSignedTransaction('0x' + this.value, function(err, result) {
-                                if (err) {
-                                    console.log('error', err);
-                                }
-                                console.log('sent', result);
-                            });
-                        }
-                    })
-                ]
-            })
-        ]);
-    }
-});
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost/mern",
+  {
+    useMongoClient: true
+  }
+);
+
+const PORT = process.env.PORT || 3001;
+app.listen(PORT);
