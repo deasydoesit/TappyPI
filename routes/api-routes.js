@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/leafy";
 mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI);
+mongoose.createConnection(MONGODB_URI);
 
 module.exports = function (app) {
 

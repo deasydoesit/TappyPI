@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === "production") {
   }
 
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost:27017/tappy",
+  process.env.MONGODB_URI || "mongodb://localhost/tappy",
   {
     useMongoClient: true
   }

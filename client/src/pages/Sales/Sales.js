@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Redirect } from "react-router";
 import { List, ListItem } from "../../components/List";
 import Container from "../../components/Container";
-import Header from "../../components/Header";
+import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import API from "../../utils/API";
 import "./Sales.css";
@@ -31,11 +31,14 @@ class Sales extends Component {
         return (
         <div className="salesPage">
             
-            <Header />
+            <Navbar 
+                route={"/"}
+                val={"Checkout"}
+            />
 
-            {this.state.trees.length ? (
+            {this.state.sales.length ? (
             <List>
-                {this.state.trees.map(tree => (
+                {this.state.sales.map(tree => (
                 <ListItem key={tree._id}>
                     <div className="row">
                         <div className="col-md-3">

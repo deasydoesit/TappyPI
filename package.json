@@ -1,17 +1,17 @@
 {
-  "name": "mern",
+  "name": "tappypi",
   "version": "1.0.0",
-  "description": "",
+  "description": "Node-based POS for the Ethereum network",
   "main": "server.js",
   "proxy": "http://localhost:3001/",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js",
+    "start": "node server.js",
     "client": "npm run start --prefix client",
-    "dev": "concurrently \"npm run start\" \"npm run client\"",
+    "dev": "concurrently \"node server.js\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
-  "author": "",
+  "author": "Darwin Rinderer",
   "license": "ISC",
   "dependencies": {
     "concurrently": "^3.6.0",
