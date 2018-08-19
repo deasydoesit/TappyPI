@@ -1,6 +1,12 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');  
+
+const PORT = process.env.PORT || 3001;
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
@@ -11,11 +17,14 @@ if (process.env.NODE_ENV === "production") {
   }
 
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/mern",
+  process.env.MONGODB_URI || "mongodb://localhost:27017/tappy",
   {
     useMongoClient: true
   }
 );
 
-const PORT = process.env.PORT || 3001;
-app.listen(PORT);
+require("./routes/api-routes.js")(app);
+
+app.listen(PORT, function () {
+    console.log("App listening on PORT: " + PORT);
+});
