@@ -2,7 +2,7 @@ import React from "react";
 import "./Form.css";
 
 const Form = props => (
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={(e) => props.handleSubmit(e)}>
         <h3>Add New Item</h3>
         <label>
             Item:
@@ -10,7 +10,7 @@ const Form = props => (
                     type="text"
                     name="item"
                     value={props.item}
-                    onChange={props.handleChange}
+                    onChange={(e) => props.handleChange(e)}
                 />
         </label>
         <label>
@@ -19,7 +19,7 @@ const Form = props => (
                     type="text"
                     name="qty"
                     value={props.qty}
-                    onChange={props.handleChange}
+                    onChange={(e) => props.handleChange(e)}
                 />
         </label>
         <label>
@@ -28,10 +28,10 @@ const Form = props => (
                     type="text"
                     name="price"
                     value={props.price}
-                    onChange={props.handleChange}
+                    onChange={(e) => props.handleChange(e)}
                 />
-            </label>
-        <input type="submit" value="Add" />
+        </label>
+        <input type="submit"  />
     </form>
 );
 

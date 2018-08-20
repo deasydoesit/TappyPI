@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory from 'react-bootstrap-table2-editor';
+import QRCode from 'qrcode.react';
 import Container from "../../components/Container";
 import Navbar from "../../components/Navbar";
 import Jumbotron from "../../components/Jumbotron";
@@ -13,8 +14,17 @@ const columns = [{
     dataField: 'id',
     text: 'Product ID'
   }, {
-    dataField: 'name',
-    text: 'Product Name'
+    dataField: 'item',
+    text: 'Product Name',
+    validator: (newValue, row, column) => {
+        if (!isNaN(newValue)) {
+          return {
+            valid: false,
+            message: 'Produce name should be a string'
+          };
+        }
+        return true;
+      }
   }, {
     dataField: 'qty',
     text: 'Product Quantity',
@@ -51,16 +61,22 @@ const columns = [{
       }
       return true;
     }
-}];
+  }, {
+    dataField: 'totPrice',
+    text: 'Total Price'
+  }
+];
 
 class Checkout extends Component {
     constructor(props) {
         super(props);
         this.state = {
           items: [],
+          id: "",
           item: "",
           qty: "",
-          price: ""
+          price: "",
+          qrVal: 0
         };
     }
 
@@ -78,13 +94,22 @@ class Checkout extends Component {
     
     handleSubmit = event => {
         event.preventDefault();
-        this.setState({ item: event.target.value, qty: event.target.value, price: event.target.price })
+        let totPrice = this.state.qty * this.state.price;
+        let val = this.state.qrVal;
+        val += totPrice;
+        this.setState({qrVal: val});
+        console.log(this.state.qrVal);
         let item = {
+            id: this.state.items.length,
             item: this.state.item,
             qty: this.state.qty,
-            price: this.state.price
-        }
-        this.setState({ item: "", qty: "", price: "" });
+            price: this.state.price,
+            totPrice: totPrice
+        };
+        let holder = this.state.items;
+        holder.push(item);
+        this.setState({items: holder});
+        this.setState({ id: "", item: "", qty: "", price: "" });
     };
     
 
@@ -99,11 +124,17 @@ class Checkout extends Component {
 
             <Jumbotron>
 
-                <Form />
+                <Form 
+                    item={ this.state.item }
+                    qty={ this.state.qty }
+                    price={ this.state.price }
+                    handleSubmit={ this.handleSubmit }
+                    handleChange={ this.handleChange }
+                />
 
                 <BootstrapTable
                   keyField="id"
-                  data={ [] }
+                  data={ this.state.items }
                   columns={ columns }
                   cellEdit={ cellEditFactory({
                     mode: 'click',
@@ -111,6 +142,12 @@ class Checkout extends Component {
                   }) }
                   noDataIndication="Table is Empty"
                 />
+                {this.state.qrVal === 0 ? (null) : (
+                <QRCode 
+                  value={this.state.qrVal.toString()}
+                  size={200}
+                />)}  
+                
 
             </Jumbotron>
 

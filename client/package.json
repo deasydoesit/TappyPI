@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
+    "qrcode.react": "^0.8.0",
     "react": "^16.4.1",
     "react-bootstrap-table-next": "^1.1.1",
     "react-bootstrap-table2-editor": "^1.0.0",
