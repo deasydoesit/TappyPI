@@ -142,13 +142,13 @@ class Checkout extends Component {
                   }) }
                   noDataIndication="Table is Empty"
                 />
+                
                 {this.state.qrVal === 0 ? (null) : (
                 <QRCode 
                   value={this.state.qrVal.toString()}
                   size={200}
                 />)}  
                 
-
             </Jumbotron>
 
             <Footer />
