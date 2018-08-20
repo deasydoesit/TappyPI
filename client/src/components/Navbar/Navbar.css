@@ -1,20 +1,8 @@
-.logo {
-    background-color: white;
-    border-bottom: solid 5px darkgray;
-    padding: 5px;
-    margin-right: 0px;
+.navbar-wrapper {
+    width: 960px;
+    margin: 0 auto;
 }
 
-.logo h1 {
-    font-family: 'Cabin Sketch';
-    font-size: 80px;
-    display: inline-block;
-    margin-left: 25px;
-    position: absolute;
-    top: 25px;
-}
-
-.logo img {
-    height: 125px;
-    display: inline-block;
+.navbar-item-right {
+    float: right;
 }
