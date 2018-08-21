@@ -6,3 +6,12 @@
 .navbar-item-right {
     float: right;
 }
+
+.navbar-brand {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.navbar-img {
+    height: 42px;
+}

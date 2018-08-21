@@ -1,7 +1,7 @@
 import React from "react";
 import "./Form.css";
 
-const Form = props => (
+const Form = props => (  
     <div className="form-container">
         <form onSubmit={(e) => props.handleSubmit(e)}>
             <h3>Add New Item</h3>
@@ -32,7 +32,7 @@ const Form = props => (
                     onChange={(e) => props.handleChange(e)}
                 />
             </div>
-            <button type="submit" className="btn btn-primary">Add Item!</button>
+            <button type="submit" className="btn btn-color">Add Item!</button>
         </form>
     </div>
 );

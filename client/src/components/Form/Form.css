@@ -5,3 +5,19 @@
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
+
+.btn-color {
+    background-color: #7986CC;
+    color: white;
+    font-weight: 600;
+}
+
+.btn:focus {
+    box-shadow: 0 0 0 0.2rem rgba(167,176,221,.25);
+}
+
+.btn:hover {
+    background-color: #5C6BC0;
+}
+
+
