@@ -2,3 +2,14 @@
     z-index: 1000;
     opacity: 1!important;
 }
+
+.container-special {
+    margin-top: 14vh;
+    padding-right: 4vw;
+    padding-left: 4vw;
+}
+
+.qr-container {
+    padding-top: 30px;
+    text-align: center
+}

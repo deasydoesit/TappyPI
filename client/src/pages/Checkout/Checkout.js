@@ -121,11 +121,9 @@ class Checkout extends Component {
               route={"/Sales"}
               val={"Sales"}
             />
-
-            <Jumbotron>
-
+            <div className="container-special">
               <div className="row">
-                <div className="col-md-6">
+                <div className="col-md-4">
                   <Form 
                     item={ this.state.item }
                     qty={ this.state.qty }
@@ -133,26 +131,30 @@ class Checkout extends Component {
                     handleSubmit={ this.handleSubmit }
                     handleChange={ this.handleChange }
                   />
+                  {this.state.qrVal === 0 ? (null) : (
+                  <div className="row qr-container">
+                    <div className="col-md-2"></div>
+                    <div className="col-md-10">
+                      <QRCode 
+                        value={this.state.qrVal.toString()}
+                        size={200}
+                      />
+                      <h3>Total: {this.state.qrVal.toString()}</h3>
+                    </div>
+                  </div>
+                  )} 
                 </div>
-                {this.state.qrVal === 0 ? (null) : (
-                  <div className="col-md-6">
-                    <QRCode 
-                      value={this.state.qrVal.toString()}
-                      size={200}
-                    />
-                    <h3>Total: {this.state.qrVal.toString()}</h3>
-                  </div>)} 
+                <div className="col-md-8">
+                  <h3>Receipt</h3>
+                  <BootstrapTable
+                    keyField="id"
+                    data={ this.state.items }
+                    columns={ columns }
+                    noDataIndication="No Items Have Been Added"
+                  /> 
+                </div>
               </div>
-
-              <BootstrapTable
-                keyField="id"
-                data={ this.state.items }
-                columns={ columns }
-                noDataIndication="No Items Have Been Added"
-              /> 
-                
-            </Jumbotron>
-
+            </div>
             <Footer />
 
         </Container>
