@@ -23,14 +23,6 @@ class Sales extends Component {
             .catch(err => console.log(err));
     }
 
-    loadSales = () => {
-        API.getSales()
-          .then(res => {
-            this.setState({ sales: res.data });
-          })
-          .catch(err => console.log(err));
-    }
-
     render() {
         return (
         <div className="salesPage">
