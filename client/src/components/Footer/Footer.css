@@ -3,7 +3,6 @@
     width: 100%;
     bottom: 0;
     background-color: white;
-    height: 80px;
     text-align: center;
     margin-top: 7%;
     margin: 0 auto;
@@ -12,6 +11,6 @@
 .copyright {
     padding-top: 25px;
     color: #343a40;
-    font-size: 16px;
-    font-family: 'Love Ya Like A Sister', cursive;
+    font-size: 10px;
+    font-family: 'Garamond', 'Palatino', 'Times';
 }

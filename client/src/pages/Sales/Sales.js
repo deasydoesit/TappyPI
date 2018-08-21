@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router";
 import { List, ListItem } from "../../components/List";
-import Container from "../../components/Container";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import API from "../../utils/API";
@@ -34,20 +32,14 @@ class Sales extends Component {
 
             {this.state.sales.length ? (
             <List>
-                {this.state.sales.map(tree => (
-                <ListItem key={tree._id}>
+                {this.state.sales.map(sale => (
+                <ListItem key={sale._id}>
                     <div className="row">
                         <div className="col-md-3">
                         <i>
-                            <strong>{tree.name}</strong>
-                            <p>{tree.sciName}</p>
+                            <strong>{sale.name}</strong>
+                            <p>{sale.sciName}</p>
                         </i>
-                        </div>
-                        <div className="col-md-3">
-                        <img src={tree.path} />
-                        </div>
-                        <div className="col-md-3">
-                        <img src={tree.range} />
                         </div>
                         <div className="col-md-1"></div>
                     </div>
