@@ -1,5 +1,6 @@
-var Web3 = require('web3');
-var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d389caf107ea4b5ea660d1f636ebb772"));
+const Web3 = require('web3');
+const web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d389caf107ea4b5ea660d1f636ebb772"));
+const crmController = require("../controllers/crmController");
 
 module.exports = { 
     sendTx: function(value) {
@@ -7,13 +8,12 @@ module.exports = {
             if (err) {
                 console.log('error', err);
             }
-            console.log('result', result);
-            console.log(typeof result);
             console.log('sent', result);
-            setTimeout(function(result) {
-                web3.eth.getTransaction(result)
-                    .then(console.log);
-              }, 5000);
+            let tx = {
+                tx_hash: result,
+                link: "https://ropsten.etherscan.io/tx/" + result
+            }
+            crmController.create(tx);
         });
     }
 }

@@ -3,10 +3,6 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const OrderSchema = new Schema({
-  total: {
-    type: String,
-    required: true
-  },
   tx_hash: {
     type: String,
     required: true
