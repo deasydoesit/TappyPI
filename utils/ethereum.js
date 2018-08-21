@@ -1,6 +1,7 @@
 const Web3 = require('web3');
 const web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d389caf107ea4b5ea660d1f636ebb772"));
 const crmController = require("../controllers/crmController");
+var db = require("../models");
 
 module.exports = { 
     sendTx: function(value) {
@@ -13,7 +14,9 @@ module.exports = {
                 tx_hash: result,
                 link: "https://ropsten.etherscan.io/tx/" + result
             }
-            crmController.create(tx);
+            db.Order
+              .create(tx)
+              .catch(err => console(err));
         });
     }
 }
