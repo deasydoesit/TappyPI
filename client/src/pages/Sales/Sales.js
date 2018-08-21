@@ -16,7 +16,11 @@ class Sales extends Component {
     }
 
     componentDidMount = () => {
-        this.loadSales();
+        API.getSales()
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => console.log(err));
     }
 
     loadSales = () => {
