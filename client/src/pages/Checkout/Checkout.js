@@ -118,36 +118,38 @@ class Checkout extends Component {
         <Container fluid>
 
             <Navbar
-                route={"/Sales"}
-                val={"Sales"}
+              route={"/Sales"}
+              val={"Sales"}
             />
 
             <Jumbotron>
 
-                <Form 
+              <div className="row">
+                <div className="col-md-6">
+                  <Form 
                     item={ this.state.item }
                     qty={ this.state.qty }
                     price={ this.state.price }
                     handleSubmit={ this.handleSubmit }
                     handleChange={ this.handleChange }
-                />
-
-                <BootstrapTable
-                  keyField="id"
-                  data={ this.state.items }
-                  columns={ columns }
-                  cellEdit={ cellEditFactory({
-                    mode: 'click',
-                    blurToSave: true
-                  }) }
-                  noDataIndication="Table is Empty"
-                />
-                
+                  />
+                </div>
                 {this.state.qrVal === 0 ? (null) : (
-                <QRCode 
-                  value={this.state.qrVal.toString()}
-                  size={200}
-                />)}  
+                  <div className="col-md-6">
+                    <QRCode 
+                      value={this.state.qrVal.toString()}
+                      size={200}
+                    />
+                    <h3>Total: {this.state.qrVal.toString()}</h3>
+                  </div>)} 
+              </div>
+
+              <BootstrapTable
+                keyField="id"
+                data={ this.state.items }
+                columns={ columns }
+                noDataIndication="No Items Have Been Added"
+              /> 
                 
             </Jumbotron>
 
