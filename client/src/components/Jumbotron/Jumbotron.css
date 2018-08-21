@@ -1,7 +1,12 @@
 .jumbotron {
     text-align: center;
-    width: 100%;
-    margin-top: 100px;
-    margin-bottom: 100px;
-    border: solid 3px green;
+    max-width: 960px;
+    border: solid 3px #343a40;
+    margin: 100px auto;
+}
+
+@media screen and (max-width: 960px) {
+    .jumbotron {
+        width: 90%;
+    }
 }

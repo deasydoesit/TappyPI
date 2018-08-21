@@ -1,7 +1,8 @@
 import React from "react";
+import "./Container.css"
 
-const Container = ({ fluid, children }) => (
-  <div className={`container${fluid ? "-fluid" : ""}`}>
+const Container = ({ children }) => (
+  <div className="container-fluid manage-padding">
     {children}
   </div>
 );

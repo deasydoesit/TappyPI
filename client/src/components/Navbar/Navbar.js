@@ -8,11 +8,11 @@ const Navbar = props => (
             <Link to="/">
                 <a className="navbar-brand" href="#">Tappy</a>
             </Link>
-            <Link to={props.route}>
+            {/* <Link to={props.route}> */}
                 <span className="navbar-text navbar-item-right">
                     {props.val}
                 </span>
-            </Link>
+            {/* </Link> */}
         </div>
     </nav>
 );
