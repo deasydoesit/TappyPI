@@ -1,8 +1,5 @@
 var bleno = require('bleno');
 var sendTx = require('./sendTx');
-// var Web3 = require('web3');
-
-// var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d389caf107ea4b5ea660d1f636ebb772"));
 
 function ble() {
     bleno.on('stateChange', function(state) {
@@ -38,25 +35,10 @@ function ble() {
                             uuid : '34cd',
                             properties : ['notify', 'read', 'write'],
                             
-                            onReadRequest : function(offset, callback) {
-                                console.log("Read request received");
-                                callback(this.RESULT_SUCCESS, Buffer("Echo: " + (this.value ? this.value.toString("utf-8") : "")));
-                            },
-                            
                             onWriteRequest : function(data, offset, withoutResponse, callback) {
                                 this.value = data;
-                                // var serializedTx = this.value.toString("hex");
-                                // console.log(data);
-                                // console.log('Write request: value = ' + this.value);
                                 sendTx(this.value);
                                 callback(this.RESULT_SUCCESS);
-
-                                // web3.eth.sendSignedTransaction('0x' + this.value, function(err, result) {
-                                //     if (err) {
-                                //         console.log('error', err);
-                                //     }
-                                //     console.log('sent', result);
-                                // });
                             }
                         })
                     ]
