@@ -8,6 +8,10 @@ module.exports = {
                 console.log('error', err);
             }
             console.log('sent', result);
+            setTimeout(function(result) {
+                web3.eth.getTransaction(result)
+                    .then(console.log);
+              }, 5000);
         });
     }
 }

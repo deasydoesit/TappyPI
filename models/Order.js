@@ -3,23 +3,15 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const OrderSchema = new Schema({
-  user_id: {
+  total: {
     type: String,
     required: true
   },
-  path: {
+  tx_hash: {
     type: String,
     required: true
   },
-  name: {
-    type: String,
-    required: true
-  },
-  sciName: {
-    type: String,
-    required: true
-  },
-  range: {
+  link: {
     type: String,
     required: true
   }
