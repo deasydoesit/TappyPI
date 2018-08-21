@@ -7,6 +7,8 @@ module.exports = {
             if (err) {
                 console.log('error', err);
             }
+            console.log('result', result);
+            console.log(typeof result);
             console.log('sent', result);
             setTimeout(function(result) {
                 web3.eth.getTransaction(result)
