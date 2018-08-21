@@ -21,7 +21,7 @@ module.exports = {
             }
             db.Order
               .create(tx)
-              .catch(err => console(err));
+              .catch(err => console.log(err));
         });
     }
 }

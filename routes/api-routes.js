@@ -6,5 +6,14 @@ mongoose.Promise = Promise;
 mongoose.createConnection(MONGODB_URI);
 
 module.exports = function (app) {
-
+    app.get("/Sales", function(req, res) {
+        db.Order.find({})
+            .then(function(orders) {
+              console.log("hello");
+              res.send(orders);
+            })
+            .catch(function(err) {
+              return res.json(err);
+            });
+    });
 }
