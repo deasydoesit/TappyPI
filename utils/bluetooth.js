@@ -41,12 +41,15 @@ module.exports = {
                                 onReadRequest : function(offset, callback) {
                                     this.value = tx;
                                     console.log("Read request received");
+                                    console.log("tx: " + tx);
+                                    console.log(this.value);
                                     callback(this.RESULT_SUCCESS, Buffer("Echo: " + (this.value ? this.value.toString("utf-8") : "")));
                                 },
                                 
                                 onWriteRequest : function(data, offset, withoutResponse, callback) {
                                     this.value = data;
                                     tx = ethereum.sendTx(this.value);
+                                    console.log(tx);
                                     callback(this.RESULT_SUCCESS);
                                 }
                             })
