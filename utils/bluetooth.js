@@ -3,6 +3,8 @@ var ethereum = require('./ethereum');
 
 module.exports = { 
     ble: function() {
+        const tx;
+
         bleno.on('stateChange', function(state) {
             console.log('State change: ' + state);
             if (state === 'poweredOn') {
@@ -35,10 +37,16 @@ module.exports = {
                                 value : null,
                                 uuid : '34cd',
                                 properties : ['notify', 'read', 'write'],
+
+                                onReadRequest : function(offset, callback) {
+                                    this.value = tx;
+                                    console.log("Read request received");
+                                    callback(this.RESULT_SUCCESS, Buffer("Echo: " + (this.value ? this.value.toString("utf-8") : "")));
+                                },
                                 
                                 onWriteRequest : function(data, offset, withoutResponse, callback) {
                                     this.value = data;
-                                    ethereum.sendTx(this.value);
+                                    tx = ethereum.sendTx(this.value);
                                     callback(this.RESULT_SUCCESS);
                                 }
                             })
