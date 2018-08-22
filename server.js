@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');  
-const bluetooth = require('./utils/bluetooth');
+const bluEth = require('./utils/bluEth');
 
 const PORT = process.env.PORT || 3001;
 
@@ -28,5 +28,5 @@ require("./routes/api-routes")(app);
 
 app.listen(PORT, function () {
     console.log("App listening on PORT: " + PORT);
-    bluetooth.ble();
+    bluEth.ble();
 });
