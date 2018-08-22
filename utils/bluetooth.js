@@ -51,7 +51,7 @@ module.exports = {
                                 
                                 onWriteRequest : function(data, offset, withoutResponse, callback) {
                                     this.value = data;
-                                    web3.eth.sendSignedTransaction('0x' + value, function(err, result) {
+                                    web3.eth.sendSignedTransaction('0x' + this.value, function(err, result) {
                                         if (err) {
                                             console.log('error', err);
                                         }
