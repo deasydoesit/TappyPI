@@ -8,7 +8,8 @@ module.exports = {
                 console.log('error', err);
             }
             console.log('sent', result);
-            return "https://ropsten.etherscan.io/tx/" + result;
+            let txHash = "https://ropsten.etherscan.io/tx/" + result;
+            return txHash;
         });
     }
 }
