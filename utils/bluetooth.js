@@ -48,8 +48,10 @@ module.exports = {
                                 
                                 onWriteRequest : function(data, offset, withoutResponse, callback) {
                                     this.value = data;
-                                    tx = ethereum.sendTx(this.value);
-                                    console.log(tx);
+                                    ethereum.sendTx(this.value)
+                                       .then(txHash => {
+                                          console.log(tx);
+                                       })
                                     callback(this.RESULT_SUCCESS);
                                 }
                             })
