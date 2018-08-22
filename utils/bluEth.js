@@ -45,7 +45,7 @@ module.exports = {
                                     console.log("Read request received");
                                     console.log("tx: " + tx);
                                     console.log(this.value);
-                                    callback(this.RESULT_SUCCESS, Buffer("Echo: " + (this.value ? this.value.toString("utf-8") : "")));
+                                    callback(this.RESULT_SUCCESS, Buffer((this.value ? this.value.toString("utf-8") : "")));
                                 },
                                 
                                 onWriteRequest : function(data, offset, withoutResponse, callback) {
