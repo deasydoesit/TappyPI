@@ -3,7 +3,7 @@ var ethereum = require('./ethereum');
 
 module.exports = { 
     ble: function() {
-        const tx;
+        let tx = "";
 
         bleno.on('stateChange', function(state) {
             console.log('State change: ' + state);
